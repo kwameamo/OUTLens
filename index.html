@@ -309,6 +309,20 @@
         .fine-tune {
             padding: 20px;
             background: #333;
+            border-top: 1px solid #444;
+            margin-top: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .fine-tune[style*="display: none"] {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .fine-tune:not([style*="display: none"]) {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .control-group {
@@ -447,10 +461,9 @@
 <body>
     <div class="app-container">
         <div class="sidebar">
-            <div class="sidebar-icon active icon-filters" data-panel="filters"></div>
             <div class="sidebar-icon icon-crop" data-panel="crop"></div>
-            <div class="sidebar-icon icon-adjust" data-panel="adjust"></div>
             <div class="sidebar-icon icon-frames" data-panel="frames"></div>
+            <div class="sidebar-icon icon-adjust" data-panel="adjust"></div>
             <div class="sidebar-icon icon-export" data-panel="export"></div>
         </div>
 
@@ -476,15 +489,14 @@
             <div class="controls-panel">
                 <div class="panel-header">
                     <div class="panel-title">Presets</div>
-                    <div style="font-size: 12px; color: #888;">Film Emulation</div>
+                    <div style="font-size: 12px; color: #888;">Select a filter to begin</div>
                 </div>
 
-                <div class="panel-content">
+                <div class="panel-content" id="filtersPanel">
                     <!-- Analog Filters -->
                     <div class="filter-section analog">
                         <div class="section-title">Analog</div>
                         <div class="filter-grid">
-                            <button class="filter-btn active" data-filter="original">Original</button>
                             <button class="filter-btn" data-filter="a1">A1</button>
                             <button class="filter-btn" data-filter="a2">A2</button>
                             <button class="filter-btn" data-filter="a3">A3</button>
@@ -563,73 +575,81 @@
                             <button class="filter-btn" data-filter="p10">Delta 400</button>
                         </div>
                     </div>
+
+                    <div class="fine-tune" id="fineTuneSection" style="display: none;">
+                        <div class="section-title">Fine Tune</div>
+                        
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Exposure</span>
+                                <span class="control-value" id="exposureValue">0</span>
+                            </div>
+                            <input type="range" id="exposure" class="slider" min="-100" max="100" value="0">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Contrast</span>
+                                <span class="control-value" id="contrastValue">0</span>
+                            </div>
+                            <input type="range" id="contrast" class="slider" min="-100" max="100" value="0">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Highlights</span>
+                                <span class="control-value" id="highlightsValue">0</span>
+                            </div>
+                            <input type="range" id="highlights" class="slider" min="-100" max="100" value="0">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Shadows</span>
+                                <span class="control-value" id="shadowsValue">0</span>
+                            </div>
+                            <input type="range" id="shadows" class="slider" min="-100" max="100" value="0">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Vibrance</span>
+                                <span class="control-value" id="vibranceValue">0</span>
+                            </div>
+                            <input type="range" id="vibrance" class="slider" min="-100" max="100" value="0">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Saturation</span>
+                                <span class="control-value" id="saturationValue">0</span>
+                            </div>
+                            <input type="range" id="saturation" class="slider" min="-100" max="100" value="0">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Temperature</span>
+                                <span class="control-value" id="temperatureValue">0</span>
+                            </div>
+                            <input type="range" id="temperature" class="slider" min="-100" max="100" value="0">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Tint</span>
+                                <span class="control-value" id="tintValue">0</span>
+                            </div>
+                            <input type="range" id="tint" class="slider" min="-100" max="100" value="0">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="fine-tune">
-                    <div class="section-title">Fine Tune</div>
-                    
-                    <div class="control-group">
-                        <div class="control-label">
-                            <span>Exposure</span>
-                            <span class="control-value" id="exposureValue">0</span>
-                        </div>
-                        <input type="range" id="exposure" class="slider" min="-100" max="100" value="0">
-                    </div>
-
-                    <div class="control-group">
-                        <div class="control-label">
-                            <span>Contrast</span>
-                            <span class="control-value" id="contrastValue">0</span>
-                        </div>
-                        <input type="range" id="contrast" class="slider" min="-100" max="100" value="0">
-                    </div>
-
-                    <div class="control-group">
-                        <div class="control-label">
-                            <span>Highlights</span>
-                            <span class="control-value" id="highlightsValue">0</span>
-                        </div>
-                        <input type="range" id="highlights" class="slider" min="-100" max="100" value="0">
-                    </div>
-
-                    <div class="control-group">
-                        <div class="control-label">
-                            <span>Shadows</span>
-                            <span class="control-value" id="shadowsValue">0</span>
-                        </div>
-                        <input type="range" id="shadows" class="slider" min="-100" max="100" value="0">
-                    </div>
-
-                    <div class="control-group">
-                        <div class="control-label">
-                            <span>Vibrance</span>
-                            <span class="control-value" id="vibranceValue">0</span>
-                        </div>
-                        <input type="range" id="vibrance" class="slider" min="-100" max="100" value="0">
-                    </div>
-
-                    <div class="control-group">
-                        <div class="control-label">
-                            <span>Saturation</span>
-                            <span class="control-value" id="saturationValue">0</span>
-                        </div>
-                        <input type="range" id="saturation" class="slider" min="-100" max="100" value="0">
-                    </div>
-
-                    <div class="control-group">
-                        <div class="control-label">
-                            <span>Temperature</span>
-                            <span class="control-value" id="temperatureValue">0</span>
-                        </div>
-                        <input type="range" id="temperature" class="slider" min="-100" max="100" value="0">
-                    </div>
-
-                    <div class="control-group">
-                        <div class="control-label">
-                            <span>Tint</span>
-                            <span class="control-value" id="tintValue">0</span>
-                        </div>
-                        <input type="range" id="tint" class="slider" min="-100" max="100" value="0">
+                <!-- Action Panel (initially hidden) -->
+                <div class="panel-content" id="actionPanel" style="display: none;">
+                    <div class="filter-section">
+                        <div class="section-title" id="actionTitle">Action Panel</div>
+                        <div id="actionContent"></div>
                     </div>
                 </div>
 
@@ -648,67 +668,65 @@
             vibrance: 0, saturation: 0, temperature: 0, tint: 0
         };
 
-        // Comprehensive filter presets (exactly 50 filters)
+        // Comprehensive filter presets (exactly 49 filters - no "original")
         const filterPresets = {
-            original: { exposure: 0, contrast: 0, highlights: 0, shadows: 0, vibrance: 0, saturation: 0, temperature: 0, tint: 0 },
-            
-            // Analog (8 filters)
-            a1: { exposure: 15, contrast: 20, highlights: -10, shadows: 15, vibrance: 25, saturation: 10, temperature: 20, tint: 5 },
-            a2: { exposure: 10, contrast: 15, highlights: -15, shadows: 20, vibrance: 30, saturation: 15, temperature: 25, tint: 10 },
-            a3: { exposure: 20, contrast: 10, highlights: -20, shadows: 25, vibrance: 20, saturation: 20, temperature: 15, tint: -5 },
-            a4: { exposure: 5, contrast: 25, highlights: -5, shadows: 10, vibrance: 35, saturation: 5, temperature: 30, tint: 15 },
-            a5: { exposure: 25, contrast: 5, highlights: -25, shadows: 30, vibrance: 15, saturation: 25, temperature: 10, tint: 20 },
-            a6: { exposure: 12, contrast: 18, highlights: -12, shadows: 18, vibrance: 28, saturation: 12, temperature: 22, tint: 8 },
-            a7: { exposure: 18, contrast: 12, highlights: -18, shadows: 22, vibrance: 22, saturation: 18, temperature: 18, tint: -10 },
-            a8: { exposure: 8, contrast: 22, highlights: -8, shadows: 12, vibrance: 32, saturation: 8, temperature: 28, tint: 12 },
+            // Analog (8 filters) - Warm, film-like looks
+            a1: { exposure: 15, contrast: 20, highlights: -10, shadows: 15, vibrance: 25, saturation: 15, temperature: 20, tint: 5 },
+            a2: { exposure: 10, contrast: 15, highlights: -15, shadows: 20, vibrance: 30, saturation: 20, temperature: 25, tint: 10 },
+            a3: { exposure: 20, contrast: 10, highlights: -20, shadows: 25, vibrance: 20, saturation: 25, temperature: 15, tint: -5 },
+            a4: { exposure: 5, contrast: 25, highlights: -5, shadows: 10, vibrance: 35, saturation: 10, temperature: 30, tint: 15 },
+            a5: { exposure: 25, contrast: 5, highlights: -25, shadows: 30, vibrance: 15, saturation: 30, temperature: 10, tint: 20 },
+            a6: { exposure: 12, contrast: 18, highlights: -12, shadows: 18, vibrance: 28, saturation: 18, temperature: 22, tint: 8 },
+            a7: { exposure: 18, contrast: 12, highlights: -18, shadows: 22, vibrance: 22, saturation: 22, temperature: 18, tint: -10 },
+            a8: { exposure: 8, contrast: 22, highlights: -8, shadows: 12, vibrance: 32, saturation: 12, temperature: 28, tint: 12 },
 
-            // B&W (10 filters)
-            bw1: { exposure: 10, contrast: 30, highlights: -20, shadows: 20, vibrance: -100, saturation: -100, temperature: 0, tint: 0 },
-            bw2: { exposure: -5, contrast: 40, highlights: -30, shadows: 30, vibrance: -100, saturation: -100, temperature: -10, tint: 5 },
-            bw3: { exposure: 25, contrast: 20, highlights: -10, shadows: 15, vibrance: -100, saturation: -100, temperature: 5, tint: 0 },
-            bw4: { exposure: -15, contrast: 50, highlights: -40, shadows: 40, vibrance: -100, saturation: -100, temperature: -5, tint: 10 },
-            bw5: { exposure: 15, contrast: 25, highlights: -15, shadows: 20, vibrance: -100, saturation: -100, temperature: 10, tint: -5 },
-            bw6: { exposure: 5, contrast: 35, highlights: -25, shadows: 25, vibrance: -100, saturation: -100, temperature: -15, tint: 15 },
-            bw7: { exposure: -10, contrast: 45, highlights: -35, shadows: 35, vibrance: -100, saturation: -100, temperature: 0, tint: 20 },
-            bw8: { exposure: 20, contrast: 15, highlights: -5, shadows: 10, vibrance: -100, saturation: -100, temperature: 15, tint: -10 },
-            bw9: { exposure: 8, contrast: 38, highlights: -28, shadows: 28, vibrance: -100, saturation: -100, temperature: -8, tint: 12 },
-            bw10: { exposure: 12, contrast: 32, highlights: -22, shadows: 22, vibrance: -100, saturation: -100, temperature: 18, tint: -8 },
+            // B&W (10 filters) - Only these should be black and white
+            bw1: { exposure: 10, contrast: 30, highlights: -20, shadows: 20, vibrance: 0, saturation: -100, temperature: 0, tint: 0 },
+            bw2: { exposure: -5, contrast: 40, highlights: -30, shadows: 30, vibrance: 0, saturation: -100, temperature: -10, tint: 5 },
+            bw3: { exposure: 25, contrast: 20, highlights: -10, shadows: 15, vibrance: 0, saturation: -100, temperature: 5, tint: 0 },
+            bw4: { exposure: -15, contrast: 50, highlights: -40, shadows: 40, vibrance: 0, saturation: -100, temperature: -5, tint: 10 },
+            bw5: { exposure: 15, contrast: 25, highlights: -15, shadows: 20, vibrance: 0, saturation: -100, temperature: 10, tint: -5 },
+            bw6: { exposure: 5, contrast: 35, highlights: -25, shadows: 25, vibrance: 0, saturation: -100, temperature: -15, tint: 15 },
+            bw7: { exposure: -10, contrast: 45, highlights: -35, shadows: 35, vibrance: 0, saturation: -100, temperature: 0, tint: 20 },
+            bw8: { exposure: 20, contrast: 15, highlights: -5, shadows: 10, vibrance: 0, saturation: -100, temperature: 15, tint: -10 },
+            bw9: { exposure: 8, contrast: 38, highlights: -28, shadows: 28, vibrance: 0, saturation: -100, temperature: -8, tint: 12 },
+            bw10: { exposure: 12, contrast: 32, highlights: -22, shadows: 22, vibrance: 0, saturation: -100, temperature: 18, tint: -8 },
 
-            // Cinematic (10 filters)
-            c1: { exposure: 5, contrast: 40, highlights: -25, shadows: 15, vibrance: 20, saturation: -10, temperature: -15, tint: 25 },
-            c2: { exposure: 10, contrast: 35, highlights: -20, shadows: 10, vibrance: 15, saturation: -5, temperature: -25, tint: 35 },
-            c3: { exposure: -10, contrast: 50, highlights: -30, shadows: 30, vibrance: -50, saturation: -30, temperature: -20, tint: 10 },
-            c4: { exposure: 0, contrast: 45, highlights: -35, shadows: 25, vibrance: 10, saturation: -15, temperature: -10, tint: 20 },
-            c5: { exposure: 15, contrast: 30, highlights: -15, shadows: 5, vibrance: 25, saturation: 10, temperature: -30, tint: 40 },
-            c6: { exposure: -5, contrast: 55, highlights: -40, shadows: 35, vibrance: 5, saturation: -20, temperature: -25, tint: 15 },
-            c7: { exposure: -15, contrast: 60, highlights: -45, shadows: 40, vibrance: -30, saturation: -40, temperature: -15, tint: 5 },
-            c8: { exposure: 20, contrast: 20, highlights: -10, shadows: 10, vibrance: 30, saturation: 20, temperature: 25, tint: -15 },
-            c9: { exposure: 10, contrast: 25, highlights: -20, shadows: 20, vibrance: 15, saturation: 5, temperature: 35, tint: -25 },
-            c10: { exposure: 5, contrast: 35, highlights: -25, shadows: 25, vibrance: 20, saturation: 10, temperature: 20, tint: -10 },
+            // Cinematic (10 filters) - Moody, dramatic looks with color
+            c1: { exposure: 5, contrast: 40, highlights: -25, shadows: 15, vibrance: 20, saturation: 10, temperature: -15, tint: 25 },
+            c2: { exposure: 10, contrast: 35, highlights: -20, shadows: 10, vibrance: 15, saturation: 15, temperature: -25, tint: 35 },
+            c3: { exposure: -10, contrast: 50, highlights: -30, shadows: 30, vibrance: 10, saturation: 5, temperature: -20, tint: 10 },
+            c4: { exposure: 0, contrast: 45, highlights: -35, shadows: 25, vibrance: 10, saturation: 8, temperature: -10, tint: 20 },
+            c5: { exposure: 15, contrast: 30, highlights: -15, shadows: 5, vibrance: 25, saturation: 20, temperature: -30, tint: 40 },
+            c6: { exposure: -5, contrast: 55, highlights: -40, shadows: 35, vibrance: 5, saturation: 5, temperature: -25, tint: 15 },
+            c7: { exposure: -15, contrast: 60, highlights: -45, shadows: 40, vibrance: 8, saturation: 3, temperature: -15, tint: 5 },
+            c8: { exposure: 20, contrast: 20, highlights: -10, shadows: 10, vibrance: 30, saturation: 25, temperature: 25, tint: -15 },
+            c9: { exposure: 10, contrast: 25, highlights: -20, shadows: 20, vibrance: 15, saturation: 12, temperature: 35, tint: -25 },
+            c10: { exposure: 5, contrast: 35, highlights: -25, shadows: 25, vibrance: 20, saturation: 15, temperature: 20, tint: -10 },
 
-            // Vintage (10 filters)
-            v1: { exposure: 15, contrast: 15, highlights: -15, shadows: 20, vibrance: 25, saturation: 30, temperature: 40, tint: -15 },
-            v2: { exposure: 20, contrast: 10, highlights: -10, shadows: 15, vibrance: 30, saturation: 25, temperature: 30, tint: 25 },
-            v3: { exposure: 10, contrast: 20, highlights: -20, shadows: 25, vibrance: 20, saturation: 20, temperature: 25, tint: 15 },
-            v4: { exposure: 25, contrast: 5, highlights: -5, shadows: 10, vibrance: -20, saturation: 40, temperature: 50, tint: 35 },
-            v5: { exposure: 30, contrast: 0, highlights: -25, shadows: 30, vibrance: 35, saturation: 35, temperature: 35, tint: 20 },
-            v6: { exposure: 18, contrast: 12, highlights: -12, shadows: 18, vibrance: 28, saturation: 28, temperature: 38, tint: -8 },
-            v7: { exposure: 12, contrast: 8, highlights: -18, shadows: 22, vibrance: 22, saturation: 32, temperature: 42, tint: 28 },
-            v8: { exposure: 22, contrast: 15, highlights: -8, shadows: 12, vibrance: 32, saturation: 18, temperature: 32, tint: 12 },
-            v9: { exposure: 16, contrast: 18, highlights: -14, shadows: 16, vibrance: 26, saturation: 26, temperature: 36, tint: -12 },
-            v10: { exposure: 14, contrast: 22, highlights: -16, shadows: 18, vibrance: 24, saturation: 24, temperature: -20, tint: 30 },
+            // Vintage (10 filters) - Warm, nostalgic colors
+            v1: { exposure: 15, contrast: 15, highlights: -15, shadows: 20, vibrance: 25, saturation: 35, temperature: 40, tint: -15 },
+            v2: { exposure: 20, contrast: 10, highlights: -10, shadows: 15, vibrance: 30, saturation: 30, temperature: 30, tint: 25 },
+            v3: { exposure: 10, contrast: 20, highlights: -20, shadows: 25, vibrance: 20, saturation: 25, temperature: 25, tint: 15 },
+            v4: { exposure: 25, contrast: 5, highlights: -5, shadows: 10, vibrance: 15, saturation: 50, temperature: 50, tint: 35 },
+            v5: { exposure: 30, contrast: 0, highlights: -25, shadows: 30, vibrance: 35, saturation: 40, temperature: 35, tint: 20 },
+            v6: { exposure: 18, contrast: 12, highlights: -12, shadows: 18, vibrance: 28, saturation: 32, temperature: 38, tint: -8 },
+            v7: { exposure: 12, contrast: 8, highlights: -18, shadows: 22, vibrance: 22, saturation: 38, temperature: 42, tint: 28 },
+            v8: { exposure: 22, contrast: 15, highlights: -8, shadows: 12, vibrance: 32, saturation: 25, temperature: 32, tint: 12 },
+            v9: { exposure: 16, contrast: 18, highlights: -14, shadows: 16, vibrance: 26, saturation: 30, temperature: 36, tint: -12 },
+            v10: { exposure: 14, contrast: 22, highlights: -16, shadows: 18, vibrance: 24, saturation: 28, temperature: -20, tint: 30 },
 
-            // Pro Film (10 filters)
-            p1: { exposure: 12, contrast: 18, highlights: -12, shadows: 15, vibrance: 25, saturation: 20, temperature: 18, tint: 8 },
-            p2: { exposure: 18, contrast: 12, highlights: -18, shadows: 20, vibrance: 30, saturation: 15, temperature: 12, tint: 12 },
-            p3: { exposure: 15, contrast: 15, highlights: -15, shadows: 18, vibrance: 28, saturation: 18, temperature: 15, tint: 5 },
-            p4: { exposure: 8, contrast: 35, highlights: -25, shadows: 25, vibrance: -80, saturation: -80, temperature: 5, tint: 15 },
-            p5: { exposure: 5, contrast: 40, highlights: -30, shadows: 30, vibrance: -90, saturation: -90, temperature: 0, tint: 10 },
-            p6: { exposure: 20, contrast: 20, highlights: -10, shadows: 12, vibrance: 35, saturation: 25, temperature: 20, tint: -5 },
-            p7: { exposure: 10, contrast: 25, highlights: -15, shadows: 10, vibrance: 40, saturation: 30, temperature: -10, tint: 20 },
-            p8: { exposure: 15, contrast: 22, highlights: -12, shadows: 15, vibrance: 32, saturation: 22, temperature: 5, tint: 15 },
-            p9: { exposure: 22, contrast: 16, highlights: -16, shadows: 18, vibrance: 28, saturation: 24, temperature: 22, tint: 6 },
-            p10: { exposure: 6, contrast: 38, highlights: -28, shadows: 28, vibrance: -85, saturation: -85, temperature: 8, tint: 12 }
+            // Pro Film (10 filters) - Professional film emulations
+            p1: { exposure: 12, contrast: 18, highlights: -12, shadows: 15, vibrance: 25, saturation: 25, temperature: 18, tint: 8 },
+            p2: { exposure: 18, contrast: 12, highlights: -18, shadows: 20, vibrance: 30, saturation: 20, temperature: 12, tint: 12 },
+            p3: { exposure: 15, contrast: 15, highlights: -15, shadows: 18, vibrance: 28, saturation: 22, temperature: 15, tint: 5 },
+            p4: { exposure: 8, contrast: 35, highlights: -25, shadows: 25, vibrance: 0, saturation: -100, temperature: 5, tint: 15 },
+            p5: { exposure: 5, contrast: 40, highlights: -30, shadows: 30, vibrance: 0, saturation: -100, temperature: 0, tint: 10 },
+            p6: { exposure: 20, contrast: 20, highlights: -10, shadows: 12, vibrance: 35, saturation: 30, temperature: 20, tint: -5 },
+            p7: { exposure: 10, contrast: 25, highlights: -15, shadows: 10, vibrance: 40, saturation: 35, temperature: -10, tint: 20 },
+            p8: { exposure: 15, contrast: 22, highlights: -12, shadows: 15, vibrance: 32, saturation: 28, temperature: 5, tint: 15 },
+            p9: { exposure: 22, contrast: 16, highlights: -16, shadows: 18, vibrance: 28, saturation: 30, temperature: 22, tint: 6 },
+            p10: { exposure: 6, contrast: 38, highlights: -28, shadows: 28, vibrance: 0, saturation: -100, temperature: 8, tint: 12 }
         };
 
         // Initialize app
@@ -799,8 +817,16 @@
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     // Add active class to clicked button
                     this.classList.add('active');
+                    
                     // Apply filter
                     applyPreset(this.dataset.filter);
+                    
+                    // Show fine-tune section after filter selection
+                    document.getElementById('fineTuneSection').style.display = 'block';
+                    
+                    // Update header text
+                    document.querySelector('.panel-header .panel-title').textContent = 'Filters & Fine Tune';
+                    document.querySelector('.panel-header div:last-child').textContent = 'Adjust your selected filter';
                 });
             });
 
@@ -821,24 +847,73 @@
         function switchPanel(panel) {
             console.log('Switching to panel:', panel);
             
+            // Hide action panel and show filters panel by default
+            document.getElementById('actionPanel').style.display = 'none';
+            document.getElementById('filtersPanel').style.display = 'block';
+            
             switch(panel) {
-                case 'filters':
-                    // Already showing filters panel
-                    break;
                 case 'crop':
-                    alert('Crop functionality will be available in the next update!');
-                    break;
-                case 'adjust':
-                    // Scroll to fine tune section
-                    document.querySelector('.fine-tune').scrollIntoView({ behavior: 'smooth' });
+                    showActionPanel('Crop Tool', `
+                        <div style="padding: 20px; text-align: center; color: #888;">
+                            <div style="font-size: 48px; margin-bottom: 20px;">✂️</div>
+                            <p>Crop functionality</p>
+                            <p style="font-size: 12px; margin-top: 10px;">Coming soon in next update</p>
+                        </div>
+                    `);
                     break;
                 case 'frames':
-                    alert('Frame functionality will be available in the next update!');
+                    showActionPanel('Frame Tool', `
+                        <div style="padding: 20px; text-align: center; color: #888;">
+                            <div style="font-size: 48px; margin-bottom: 20px;">🖼️</div>
+                            <p>Frame functionality</p>
+                            <p style="font-size: 12px; margin-top: 10px;">Coming soon in next update</p>
+                        </div>
+                    `);
+                    break;
+                case 'adjust':
+                    // Scroll to fine tune section if it's visible
+                    const fineTuneSection = document.getElementById('fineTuneSection');
+                    if (fineTuneSection.style.display !== 'none') {
+                        fineTuneSection.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        showActionPanel('Adjust Tool', `
+                            <div style="padding: 20px; text-align: center; color: #888;">
+                                <div style="font-size: 48px; margin-bottom: 20px;">🎛️</div>
+                                <p>Select a filter first</p>
+                                <p style="font-size: 12px; margin-top: 10px;">Fine-tune controls will appear after selecting a filter</p>
+                            </div>
+                        `);
+                    }
                     break;
                 case 'export':
-                    exportImage();
+                    if (originalImageData) {
+                        exportImage();
+                        // Remove active state after export
+                        setTimeout(() => {
+                            document.querySelectorAll('.sidebar-icon').forEach(i => i.classList.remove('active'));
+                        }, 1000);
+                    } else {
+                        showActionPanel('Export Tool', `
+                            <div style="padding: 20px; text-align: center; color: #888;">
+                                <div style="font-size: 48px; margin-bottom: 20px;">💾</div>
+                                <p>No image to export</p>
+                                <p style="font-size: 12px; margin-top: 10px;">Upload an image and apply filters first</p>
+                            </div>
+                        `);
+                    }
                     break;
             }
+        }
+
+        function showActionPanel(title, content) {
+            document.getElementById('filtersPanel').style.display = 'none';
+            document.getElementById('actionPanel').style.display = 'block';
+            document.getElementById('actionTitle').textContent = title;
+            document.getElementById('actionContent').innerHTML = content;
+            
+            // Update header
+            document.querySelector('.panel-header .panel-title').textContent = title;
+            document.querySelector('.panel-header div:last-child').textContent = 'Action panel';
         }
 
         function handleFile(file) {
@@ -901,14 +976,15 @@
             originalImageData = ctx.getImageData(0, 0, width, height);
             
             console.log('Canvas setup complete:', width + 'x' + height);
+            console.log('Image loaded. Ready for filter selection.');
         }
 
         function showImageEditor() {
             document.getElementById('uploadZone').style.display = 'none';
             document.getElementById('imageContainer').style.display = 'block';
             
-            // Reset to original filter
-            resetAll();
+            // Don't auto-apply any filters - wait for user selection
+            console.log('Image editor ready. Please select a filter.');
         }
 
         function updateValueDisplay(slider) {
@@ -962,14 +1038,14 @@
                 let g = data[i + 1];
                 let b = data[i + 2];
 
-                // Exposure
-                const exposureFactor = Math.pow(2, currentFilters.exposure / 100);
+                // Exposure (brightness adjustment)
+                const exposureFactor = 1 + (currentFilters.exposure / 100);
                 r *= exposureFactor;
                 g *= exposureFactor;
                 b *= exposureFactor;
 
                 // Contrast
-                const contrastFactor = (currentFilters.contrast + 100) / 100;
+                const contrastFactor = 1 + (currentFilters.contrast / 100);
                 r = ((r - 128) * contrastFactor) + 128;
                 g = ((g - 128) * contrastFactor) + 128;
                 b = ((b - 128) * contrastFactor) + 128;
@@ -977,55 +1053,62 @@
                 // Temperature
                 const temp = currentFilters.temperature / 100;
                 if (temp > 0) {
-                    r += temp * 40;
-                    g += temp * 20;
+                    r += temp * 25;
+                    g += temp * 10;
                 } else {
-                    b += Math.abs(temp) * 40;
-                    g += Math.abs(temp) * 20;
+                    b += Math.abs(temp) * 25;
+                    g += Math.abs(temp) * 5;
                 }
 
                 // Tint
                 const tintAmount = currentFilters.tint / 100;
                 if (tintAmount > 0) {
-                    r += tintAmount * 30;
+                    r += tintAmount * 20;
                 } else {
-                    g += Math.abs(tintAmount) * 30;
+                    g += Math.abs(tintAmount) * 20;
                 }
 
-                // Saturation
-                const satFactor = (currentFilters.saturation + 100) / 100;
+                // Saturation (fixed calculation)
+                const satFactor = 1 + (currentFilters.saturation / 100);
                 const gray = 0.299 * r + 0.587 * g + 0.114 * b;
                 r = gray + satFactor * (r - gray);
                 g = gray + satFactor * (g - gray);
                 b = gray + satFactor * (b - gray);
 
-                // Vibrance (selective saturation)
-                const vibFactor = currentFilters.vibrance / 100;
-                const maxComponent = Math.max(r, g, b);
-                const avgComponent = (r + g + b) / 3;
-                const vibranceAmount = (1 - maxComponent / 255) * vibFactor;
-                
-                r = avgComponent + vibranceAmount * (r - avgComponent);
-                g = avgComponent + vibranceAmount * (g - avgComponent);
-                b = avgComponent + vibranceAmount * (b - avgComponent);
+                // Vibrance (selective saturation boost)
+                if (currentFilters.vibrance !== 0) {
+                    const vibFactor = currentFilters.vibrance / 100;
+                    const maxComponent = Math.max(r, g, b);
+                    const saturationLevel = (maxComponent - Math.min(r, g, b)) / maxComponent || 0;
+                    const boost = vibFactor * (1 - saturationLevel) * 0.5;
+                    
+                    r = gray + (1 + boost) * (r - gray);
+                    g = gray + (1 + boost) * (g - gray);
+                    b = gray + (1 + boost) * (b - gray);
+                }
 
                 // Highlights and Shadows
                 const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
                 
-                if (luminance > 128) { // Highlights
+                if (luminance > 128 && currentFilters.highlights !== 0) {
                     const highlightAdjust = currentFilters.highlights / 100;
                     const factor = (luminance - 128) / 127;
-                    r += highlightAdjust * factor * 50;
-                    g += highlightAdjust * factor * 50;
-                    b += highlightAdjust * factor * 50;
-                } else { // Shadows
+                    const adjustment = highlightAdjust * factor * 30;
+                    r += adjustment;
+                    g += adjustment;
+                    b += adjustment;
+                }
+                
+                if (luminance <= 128 && currentFilters.shadows !== 0) {
                     const shadowAdjust = currentFilters.shadows / 100;
                     const factor = (128 - luminance) / 128;
-                    r += shadowAdjust * factor * 50;
-                    g += shadowAdjust * factor * 50;
-                    b += shadowAdjust * factor * 50;
+                    const adjustment = shadowAdjust * factor * 30;
+                    r += adjustment;
+                    g += adjustment;
+                    b += adjustment;
                 }
 
+                // Clamp values
                 data[i] = Math.max(0, Math.min(255, r));
                 data[i + 1] = Math.max(0, Math.min(255, g));
                 data[i + 2] = Math.max(0, Math.min(255, b));
@@ -1035,12 +1118,39 @@
         }
 
         function resetAll() {
-            // Reset to original preset
-            applyPreset('original');
+            // Reset filters to no filter applied
+            currentFilters = { exposure: 0, contrast: 0, highlights: 0, shadows: 0, vibrance: 0, saturation: 0, temperature: 0, tint: 0 };
+            
+            // Reset sliders
+            Object.keys(currentFilters).forEach(key => {
+                const slider = document.getElementById(key);
+                if (slider) {
+                    slider.value = currentFilters[key];
+                    updateValueDisplay(slider);
+                }
+            });
             
             // Reset active button
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector('[data-filter="original"]').classList.add('active');
+            
+            // Hide fine-tune section
+            document.getElementById('fineTuneSection').style.display = 'none';
+            
+            // Reset header text
+            document.querySelector('.panel-header .panel-title').textContent = 'Presets';
+            document.querySelector('.panel-header div:last-child').textContent = 'Select a filter to begin';
+            
+            // Show filters panel and hide action panel
+            document.getElementById('filtersPanel').style.display = 'block';
+            document.getElementById('actionPanel').style.display = 'none';
+            
+            // Remove active state from sidebar icons
+            document.querySelectorAll('.sidebar-icon').forEach(i => i.classList.remove('active'));
+            
+            // Reset canvas to original image if available
+            if (originalImageData) {
+                ctx.putImageData(originalImageData, 0, 0);
+            }
         }
 
         function exportImage() {
